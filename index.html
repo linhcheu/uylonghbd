@@ -5,48 +5,156 @@
     <title>Happy 20th Birthday Uylong!</title>
     <style>
         body {
-            background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #222;
-            text-align: center;
-            padding: 0;
+            min-height: 100vh;
             margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            /* Animated gradient background */
+            background: linear-gradient(-45deg, #0f2027, #2c5364, #ff4e50, #f9d423);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease-in-out infinite;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
         .container {
-            margin: 60px auto;
-            background: rgba(255,255,255,0.9);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            max-width: 420px;
-            padding: 40px 30px 30px 30px;
+            margin: 80px auto;
+            max-width: 440px;
+            padding: 48px 36px 36px 36px;
+            border-radius: 24px;
+            background: rgba(30, 30, 60, 0.55);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.3s forwards;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.2em;
-            color: #ff4e50;
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         .cake {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 0.5em;
+            filter: drop-shadow(0 0 16px #f9d423) drop-shadow(0 0 32px #ff4e50);
+            animation: bounce 1.2s infinite alternate, neonGlow 2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            60% { transform: translateY(-18px);}
+            100% { transform: translateY(-8px);}
+        }
+        @keyframes neonGlow {
+            0% { filter: drop-shadow(0 0 8px #f9d423) drop-shadow(0 0 16px #ff4e50);}
+            100% { filter: drop-shadow(0 0 24px #f9d423) drop-shadow(0 0 48px #ff4e50);}
+        }
+        h1 {
+            font-size: 2.7em;
+            margin-bottom: 0.3em;
+            letter-spacing: 2px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #f9d423, #ff4e50, #43cea2, #185a9d);
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite, colorChange 2.5s linear infinite alternate;
+            text-shadow: 0 0 12px #ff4e50, 0 0 24px #f9d423;
+            transition: text-shadow 0.3s;
+        }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+        @keyframes colorChange {
+            0% { text-shadow: 0 0 12px #ff4e50, 0 0 24px #f9d423;}
+            50% { text-shadow: 0 0 24px #43cea2, 0 0 48px #185a9d;}
+            100% { text-shadow: 0 0 12px #ff4e50, 0 0 24px #f9d423;}
         }
         .details {
-            font-size: 1.2em;
-            margin: 1.2em 0;
+            font-size: 1.25em;
+            margin: 1.5em 0 1em 0;
+            color: #e0e0e0;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            text-shadow: 0 1px 8px #2228;
+            transition: color 0.3s;
         }
         .footer {
             margin-top: 2em;
-            font-size: 1em;
-            color: #888;
+            font-size: 1.05em;
+            color: #b0b0b0;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 8px #2228;
+        }
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+            background: linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+            animation: floatParticle 12s linear infinite;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-120vh) scale(1.2);}
         }
     </style>
 </head>
 <body>
+    <div class="particles">
+        <!-- Particles will be generated by JS -->
+    </div>
     <div class="container">
         <div class="cake">🎂🎉</div>
         <h1>Happy 20th Birthday, Uylong!</h1>
-        
-            Let's make this day unforgettable with fun, laughter, and memories!
+       
+        <div class="footer">
+            RSVP to join the party!<br>
+            With love from your friends 💖
         </div>
-        
+    </div>
+    <script>
+        // Generate floating particles for tech/modern effect
+        const colors = [
+            'linear-gradient(135deg, #f9d423 0%, #ff4e50 100%)',
+            'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)',
+            'linear-gradient(135deg, #ff4e50 0%, #f9d423 100%)',
+            'linear-gradient(135deg, #0f2027 0%, #2c5364 100%)'
+        ];
+        const particlesContainer = document.querySelector('.particles');
+        for(let i=0; i<24; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 18 + 12;
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            p.style.left = `${Math.random()*100}vw`;
+            p.style.top = `${Math.random()*100}vh`;
+            p.style.background = colors[Math.floor(Math.random()*colors.length)];
+            p.style.animationDuration = `${8 + Math.random()*8}s`;
+            p.style.opacity = 0.5 + Math.random()*0.4;
+            particlesContainer.appendChild(p);
+        }
+    </script>
 </body>
 </html>
